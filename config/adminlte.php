@@ -87,8 +87,8 @@ return [
     |
     */
 
-    'logo' => '<b>Kelompok 14</b>',
-    'logo_img' => 'https://i.pinimg.com/736x/0c/f5/4c/0cf54c262a64aa0b3f09f61ea26c6101.jpg',
+    'logo' => '<b>POS Toko Mainan</b>',
+    'logo_img' => 'https://i.pinimg.com/736x/0d/41/5f/0d415f0e6be61e1cb745d5ebf2f0fed2.jpg',
     'logo_img_class' => 'brand-image img-circle elevation-2',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -137,7 +137,7 @@ return [
         'enabled' => true,
         'mode' => 'fullscreen',
         'img' => [
-            'path' => 'https://i.pinimg.com/736x/cc/75/41/cc754134408b9926f0280e0eecc6d66e.jpg',
+            'path' => 'https://i.pinimg.com/736x/dc/8e/41/dc8e414986a1636eb7fd916b8a06ad45.jpg',
             'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__shake',
             'width' => 60,
@@ -338,6 +338,7 @@ return [
             'url'  => 'order',
             'icon' => 'fas fa-fw fa-shopping-cart',
         ],
+
         [
             'text' => 'Jenis Produk',
             'url'  => 'jenis-produk',
@@ -356,19 +357,6 @@ return [
             'text' => 'Testimoni',
             'url'  => 'testimoni',
             'icon' => 'fas fa-fw fa-comment-dots',
-        ],
-
-        // Sidebar items:
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
         ],
         ],
         ['header' => 'labels'],

@@ -98,7 +98,7 @@
     <div class="overlay">
         <div class="text-area">
             <h1>Selamat Datang di Sistem POS</h1>
-            <p>Kelola penjualan makanan, minuman, dan produk lainnya dengan efisien dan profesional.</p>
+            <p>Kelola penjualan Toko Mainan dan lainnya dengan efisien dan profesional.</p>
             <a href="{{ route('login') }}">Masuk Dashboard</a>
         </div>
         <div class="image-area">

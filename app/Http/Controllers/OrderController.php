@@ -2,32 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KategoriTokoh;
-use App\Models\JenisProduk;
-use App\Models\Order;
+use App\Models\Produk;
 use Illuminate\Http\Request;
+use App\Models\Order;
 
 class OrderController extends Controller
 {
     public function index()
     {
-        $kategoris = KategoriTokoh::all();
-        $jenisProduks = JenisProduk::all();
-
-        $recentOrders = Order::with('jenisProduk')->latest()->take(5)->get();
-
-        return view('order.index', compact('kategoris', 'jenisProduks', 'recentOrders'));
+        $produks = Produk::all();
+        return view('order.index', compact('produks'));
     }
 
     public function store(Request $request)
     {
         Order::create([
-            'kategori_id' => $request->kategori_id,
-            'jenis_id' => $request->jenis_id,
+            'produk_id' => $request->produk_id,
             'jumlah' => $request->jumlah,
-            'total_harga' => $request->total_harga,
+            'total_harga' => Produk::find($request->produk_id)->harga * $request->jumlah,
         ]);
 
-        return redirect()->route('order.index')->with('success', 'Order berhasil ditambahkan.');
+        return redirect()->back()->with('success', 'Pesanan berhasil dibuat.');
     }
 }

@@ -9,10 +9,15 @@ class JenisProdukSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('jenis_produks')->insert([
-            ['nama' => 'Makanan'],
-            ['nama' => 'Minuman'],
-            ['nama' => 'Elektronik'],
-        ]);
+        $data = [
+            ['nama' => 'Boneka'],
+            ['nama' => 'Mobil Remote'],
+            ['nama' => 'Action Figure'],
+            ['nama' => 'Edukasi'],
+            ['nama' => 'Puzzle'],
+            ['nama' => 'Mainan Edukasi'],
+        ];
+
+        DB::table('jenis_produks')->insert($data);
     }
 }

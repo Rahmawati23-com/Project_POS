@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KategoriTokoh;
 use Illuminate\Http\Request;
 
 class KategoriTokohController extends Controller
@@ -11,7 +12,8 @@ class KategoriTokohController extends Controller
      */
     public function index()
     {
-        //
+        $kategoris = KategoriTokoh::all();
+        return view('kategori.index', compact('kategoris'));
     }
 
     /**
@@ -19,7 +21,7 @@ class KategoriTokohController extends Controller
      */
     public function create()
     {
-        //
+        return view('kategori.create');
     }
 
     /**
@@ -27,7 +29,15 @@ class KategoriTokohController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required|string|max:100'
+        ]);
+
+        KategoriTokoh::create([
+            'nama' => $request->nama
+        ]);
+
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil ditambahkan.');
     }
 
     /**
@@ -35,7 +45,8 @@ class KategoriTokohController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $kategori = KategoriTokoh::findOrFail($id);
+        return view('kategori.show', compact('kategori'));
     }
 
     /**
@@ -43,7 +54,8 @@ class KategoriTokohController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $kategori = KategoriTokoh::findOrFail($id);
+        return view('kategori.edit', compact('kategori'));
     }
 
     /**
@@ -51,7 +63,16 @@ class KategoriTokohController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nama' => 'required|string|max:100'
+        ]);
+
+        $kategori = KategoriTokoh::findOrFail($id);
+        $kategori->update([
+            'nama' => $request->nama
+        ]);
+
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil diperbarui.');
     }
 
     /**
@@ -59,6 +80,9 @@ class KategoriTokohController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $kategori = KategoriTokoh::findOrFail($id);
+        $kategori->delete();
+
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil dihapus.');
     }
 }
