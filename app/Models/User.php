@@ -20,7 +20,9 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'email_verified_at',
         'password',
+        'role',
     ];
 
     /**
@@ -46,6 +48,17 @@ class User extends Authenticatable
         ];
     }
 
+    // Tambah method helper ini
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isUser()
+    {
+        return $this->role === 'user';
+    }
+
     public function adminlte_image()
     {
         return 'https://i.pinimg.com/736x/0c/f5/4c/0cf54c262a64aa0b3f09f61ea26c6101.jpg';
@@ -58,7 +71,6 @@ class User extends Authenticatable
 
     public function adminlte_profile_url()
     {
-        return '#'; // Ganti jika kamu punya route ke halaman profil
+        return '#';
     }
-
 }

@@ -276,7 +276,6 @@
             background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
         }
 
-        /* Loading state */
         .btn.loading {
             pointer-events: none;
         }
@@ -418,7 +417,6 @@
             });
         }
 
-        // Image error handling with correct path
         function handleImageError(img, productName) {
             console.log('Image failed to load:', img.src);
             
@@ -498,7 +496,6 @@
                 }
             });
 
-            // Show no results message
             const noResultsMsg = document.getElementById('noResultsMessage');
             if (visibleCount === 0 && searchTerm !== '') {
                 if (!noResultsMsg) {
@@ -543,19 +540,15 @@
             });
         }
 
-        // Document ready
         $(document).ready(function() {
-            // Auto hide success/error alerts after 5 seconds
             setTimeout(function() {
                 $('.alert').fadeOut('slow');
             }, 5000);
 
-            // Add click handler to manually close alerts
             $('.alert .btn-close').on('click', function() {
                 $(this).closest('.alert').fadeOut('fast');
             });
 
-            // Initialize tooltips if bootstrap is available
             if (typeof bootstrap !== 'undefined') {
                 var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
                 var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
@@ -563,13 +556,11 @@
                 });
             }
 
-            // Add loading state to form submissions
             $('form').on('submit', function() {
                 const submitBtn = $(this).find('button[type="submit"], input[type="submit"]');
                 submitBtn.addClass('loading').prop('disabled', true);
             });
 
-            // Check images after page load
             setTimeout(function() {
                 $('.product-image').each(function() {
                     if (this.naturalWidth === 0) {
@@ -578,7 +569,6 @@
                 });
             }, 2000);
 
-            // Smooth scroll for anchor links
             $('a[href^="#"]').on('click', function(event) {
                 var target = $(this.getAttribute('href'));
                 if( target.length ) {
@@ -589,14 +579,12 @@
                 }
             });
 
-            // Enter key for search
             $('#searchInput').on('keypress', function(e) {
                 if (e.which == 13) {
                     searchJenisProduk();
                 }
             });
 
-            // Lazy loading for images (optional)
             if ('IntersectionObserver' in window) {
                 const imageObserver = new IntersectionObserver((entries, observer) => {
                     entries.forEach(entry => {
@@ -617,27 +605,22 @@
             }
         });
 
-        // Keyboard shortcuts
         document.addEventListener('keydown', function(e) {
-            // Ctrl+N for new item
             if (e.ctrlKey && e.key === 'n') {
                 e.preventDefault();
                 window.location.href = "{{ route('jenis-produk.create') }}";
             }
             
-            // Ctrl+R for refresh
             if (e.ctrlKey && e.key === 'r') {
                 e.preventDefault();
                 refreshPage();
             }
 
-            // Ctrl+F for search
             if (e.ctrlKey && e.key === 'f') {
                 e.preventDefault();
                 document.getElementById('searchInput').focus();
             }
 
-            // Escape to clear search
             if (e.key === 'Escape') {
                 clearSearch();
             }

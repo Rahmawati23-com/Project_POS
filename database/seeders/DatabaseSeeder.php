@@ -3,14 +3,25 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
-class DatabaseSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        $this->call([
-            JenisProdukSeeder::class,
-            ProdukManualSeeder::class,
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'password' => Hash::make('password'),
+            'role' => 'admin'
+        ]);
+
+        User::create([
+            'name' => 'User Test',
+            'email' => 'user@user.com',
+            'password' => Hash::make('password'),
+            'role' => 'user'
         ]);
     }
 }

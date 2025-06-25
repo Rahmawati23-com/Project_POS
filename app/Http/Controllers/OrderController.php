@@ -35,7 +35,6 @@ class ProdukController extends Controller
 
         $data = $request->all();
         
-        // Handle upload foto
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
             $filename = time() . '_' . $file->getClientOriginalName();
