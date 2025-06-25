@@ -10,9 +10,19 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
-        'kategori_id',
-        'jenis_id',
+        'produk_id',
+        'nama_pembeli', 
+        'email',
+        'telepon',
+        'alamat',
         'jumlah',
+        'harga_satuan',
         'total_harga',
+        'status'
     ];
+
+    public function produk()
+    {
+        return $this->belongsTo(Produk::class);
+    }
 }

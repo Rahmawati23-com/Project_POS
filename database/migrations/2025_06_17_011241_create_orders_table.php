@@ -6,35 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            
-            // Foreign key ke tabel kategori_tokoh
-            $table->unsignedBigInteger('kategori_id');
-            $table->foreign('kategori_id')->references('id')->on('kategori_tokoh')->onDelete('cascade');
-
-            // Foreign key ke tabel jenis_produks
-            $table->unsignedBigInteger('jenis_id');
-            $table->foreign('jenis_id')->references('id')->on('jenis_produks')->onDelete('cascade');
-
-            // Jumlah produk yang dipesan
-            $table->integer('jumlah');
-
-            // Total harga dari order tersebut
-            $table->integer('total_harga');
-
+            $table->foreignId('produk_id')->constrained('produks');
+            $table->string('nama_pembeli');
+            $table->string('email')->nullable();
+            $table->string('telepon')->nullable();
+            $table->text('alamat')->nullable();
+            $table->integer('jumlah')->default(1);
+            $table->decimal('harga_satuan', 10, 2);
+            $table->decimal('total_harga', 10, 2);
+            $table->enum('status', ['pending', 'proses', 'selesai', 'batal'])->default('pending');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('orders');

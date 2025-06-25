@@ -3,62 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Testimoni;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class TestimoniController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'nama_tokoh' => 'required|string|max:255',
+            'komentar' => 'required|string|min:10',
+            'rating' => 'required|integer|min:1|max:5',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        Testimoni::create([
+            'nama_tokoh' => $request->nama_tokoh,
+            'komentar' => $request->komentar,
+            'rating' => $request->rating,
+            'produk_id' => $request->produk_id ?? null,
+            'kategori_tokoh_id' => $request->kategori_tokoh_id ?? null,
+            'tanggal' => now(),
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('testimoni.index')->with('success', 'Testimoni berhasil dikirim!');
     }
 }

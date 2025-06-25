@@ -11,12 +11,18 @@ class JenisProduk extends Model
 
     protected $table = 'jenis_produks'; 
 
-    protected $fillable = ['nama']; 
+    protected $fillable = [
+        'nama',
+        'kategori_id'  
+    ]; 
 
     public function produks()
     {
         return $this->hasMany(Produk::class, 'jenis_produk_id');
-        return $this->belongsTo(KategoriTokoh::class, 'kategori_id');
+    }
 
+    public function kategori()
+    {
+        return $this->belongsTo(KategoriTokoh::class, 'kategori_id');
     }
 }

@@ -9,27 +9,57 @@ class Produk extends Model
 {
     use HasFactory;
 
-    protected $table = 'produks'; 
+    protected $table = 'produks';
 
     protected $fillable = [
         'kode',
         'nama',
+        'kategori_id',
+        'jenis_id',
+        'jenis_produk_id',
         'harga',
         'stok',
         'rating',
         'min_stok',
         'jenis_produk_id',
         'deskripsi',
-        'foto',
+        'foto'
     ];
 
-    public function jenisProduk()
+    protected $casts = [
+        'harga' => 'decimal:2',
+        'rating' => 'decimal:2',
+        'stok' => 'integer',
+        'min_stok' => 'integer',
+    ];
+
+    public function kategori()
     {
-        return $this->belongsTo(JenisProduk::class, 'jenis_produk_id');
+        return $this->belongsTo(KategoriTokoh::class, 'kategori_id');
     }
 
-    public function testimonis()
+    public function getFotoUrlAttribute()
     {
-        return $this->hasMany(Testimoni::class, 'produk_id');
+        if ($this->foto) {
+            return asset('storage/' . $this->foto);
+        }
+        return null;
+    }
+
+    public function getHargaFormattedAttribute()
+    {
+        return 'Rp ' . number_format($this->harga, 0, ',', '.');
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('stok', '>', 0);
+    }
+
+    public function scopeSearch($query, $search)
+    {
+        return $query->where('nama', 'like', '%' . $search . '%')
+                    ->orWhere('kode', 'like', '%' . $search . '%')
+                    ->orWhere('deskripsi', 'like', '%' . $search . '%');
     }
 }
