@@ -28,4 +28,10 @@ class TestimoniController extends Controller
 
         return redirect()->route('testimoni.index')->with('success', 'Testimoni berhasil dikirim!');
     }
+
+    public function index()
+    {
+        $testimoni = Testimoni::latest()->get();
+        return view('testimoni.index', compact('testimoni'));
+    }
 }
